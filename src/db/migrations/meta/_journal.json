@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710817581607,
+      "tag": "0000_legal_toad",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1710819293124,
+      "tag": "0001_gray_old_lace",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710950974505,
+      "tag": "0002_absent_skaar",
+      "breakpoints": true
+    }
+  ]
+}
