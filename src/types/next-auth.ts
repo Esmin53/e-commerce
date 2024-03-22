@@ -22,3 +22,11 @@ declare module 'next-auth' {
     }
   }
 }
+
+export type SessionUser = {
+  user: (User & {
+    id: string;
+    username: string;
+    isAdmin: boolean;
+}) | undefined
+}
