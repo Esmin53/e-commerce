@@ -1,23 +1,47 @@
+import { products } from "@/db/schema"
 import authOptions from "@/lib/auth"
+import { db } from "@/lib/db"
 import { ProductValidator } from "@/lib/validators/product-validator"
+import { eq } from "drizzle-orm"
 import { getServerSession } from "next-auth"
+  
 
 export const POST = async (req: Request) => {
     try {
-        console.log("Radi")
         const body = await req.json()
 
         const session = await getServerSession(authOptions)
 
-        if(session?.user || session?.user.isAdmin !== true) {
+        if(!session?.user || session?.user.isAdmin !== true) {
             throw new Error("Unauthorized")
         }
 
-        const {title, price, description, sex, collection, sizes, colors, images} = ProductValidator.parse(body)
+        const {title, price, description, sex, collection, sizes, colors, images} = ProductValidator.parse(body);
 
-        return new Response(JSON.stringify("OK"), {status: 200})
+        if(!sizes?.length || !colors?.length || !images?.length) {
+            return new Response(JSON.stringify("BAD REQUEST"), { status: 400})
+        }
+
+        const isTitleUnqiue = await db.select().from(products).where(eq(products.title, title))
+
+        if(isTitleUnqiue.length) {
+            return new Response(JSON.stringify("CONFLICT"), { status: 409 })
+        }
+
+        const newProduct: {createdProductId: string}[] = await db.insert(products).values({
+            //@ts-expect-error Throws error on any first field
+            title,
+            price,
+            description,
+            sex,
+            collection,
+            sizes,
+            colors,
+            images
+        }).returning({ createdProductId: products.id })
+
+        return new Response(JSON.stringify({id: newProduct[0]?.createdProductId}), {status: 200})
     } catch (error) {
-        console.log("Ne radi")
         return new Response(JSON.stringify("Server error"), {status: 500})        
     }
 }

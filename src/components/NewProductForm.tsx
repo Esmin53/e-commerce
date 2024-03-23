@@ -13,16 +13,19 @@ import { UploadButton } from "@uploadthing/react"
 import Image from "next/image"
 import { OurFileRouter } from "@/app/api/uploadthing/core"
 import { toast } from "sonner"
-import { Switch } from "./ui/switch"
-import { useForm, SubmitHandler, useFieldArray } from "react-hook-form"
+import { useForm, SubmitHandler } from "react-hook-form"
 import { ProductValidator, TProductValidator } from "@/lib/validators/product-validator"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { EnumValues } from "zod"
+import { ZodError } from "zod"
+import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 const NewProudctForm = () => {
-    const [colors, setColors] = useState<string[]>(["m"])
-    const [sizes, setSizes] = useState<string[] >([])
+    const [colors, setColors] = useState<string[]>(["black"])
+    const [sizes, setSizes] = useState<string[] >(["m"])
     const [images, setImages] = useState<string []>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const router = useRouter()
 
 
     const handleColors = (color: string) => {
@@ -34,12 +37,9 @@ const NewProudctForm = () => {
         }
     }
 
-
-
     const handleSizes = (size: string) => {
         if(sizes.includes(size)) {
             setSizes(sizes.filter((item) => item !== size))
-
         } else {
             setSizes([...sizes, size])
         }
@@ -56,6 +56,7 @@ const NewProudctForm = () => {
     })
 
     const onSubmit: SubmitHandler<TProductValidator> = async ({title, price, description, sex, collection}) => {
+        setIsLoading(true)
         try {
             if(!images.length) {
                 toast.error("Each product must have atleast one image!")
@@ -69,7 +70,6 @@ const NewProudctForm = () => {
                 toast.error("Each product must have atleast one color!")
                 return
             }
-
 
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/new-product`, {
                 method: "POST",
@@ -85,12 +85,31 @@ const NewProudctForm = () => {
                 })
             })
 
-            const data = await response.json()
+            setIsLoading(false)
+            if(!response.ok && response.status === 409) {
+                toast.error("Product with that title already exists!")
+                return
+            }
+            if(!response.ok && response.status === 400) {
+                toast.error("Please make sure to fill all the required fields before trying to create new product!")
+                return
+            }
+            if(!response.ok) {
+                throw new Error()
+            }
 
-            console.log(data)
+            const data = await response.json()
+ 
+            toast.success("Your product has been created successfully")
+            router.push(`/dashboard/overview/${data.id}`)
 
         } catch (error) {
-            console.log(error)
+            setIsLoading(false)
+            if(error instanceof ZodError) {
+                toast.error("Please make sure to fill all the required fields before trying to create new product!")
+            } else {
+                toast.error("Something went wrong, please try again.")
+            }
         }
     } 
 
@@ -108,7 +127,7 @@ const NewProudctForm = () => {
                 
                 <div>
                     <Label>Price</Label>
-                    <Input placeholder="Product price" type="number" {...register("price", {
+                    <Input placeholder="Product price" step="0.02" type="number" {...register("price", {
                         valueAsNumber: true
                     })}/>
                     {errors.price ? <p className="text-sm text-red-400 mt-1">{errors.price.message}</p> : null}
@@ -160,26 +179,26 @@ const NewProudctForm = () => {
                         <Label>Sizes</Label>
                         <div className="w-full h-10 flex justify-between items-center">
                             {SIZES.map((item) => {
-                                return <div
+                                return <div key={item.value}
                                 className={cn(" font-semibold cursor-pointer px-2 py-1 rounded-full", {
                                     "bg-slate-300 border border-slate-200 shadow": sizes.includes(item.value)
                                 })} onClick={() => handleSizes(item.value)}>{item.label}</div>
                             })}
                         </div>
-                        {errors.sizes ? <p className="text-sm text-red-400 mt-1">{errors.sizes.message}</p> : null}
+                        {!sizes.length ? <p className="text-xs font-semibold text-red-400 mt-1">Product must have atleast on size</p> : null}
                     </div>
 
                     <div className="w-2/3 flex flex-col">
                         <Label>Colors</Label>
-                        <div className="w-full h-8 grid grid-cols-11 gap-2 items-center">
+                        <div className="w-full h-10 grid grid-cols-11 gap-2 items-center">
                             {COLORS.map((item) => {
-                                return <div className={cn("h-8 w-8 rounded-full cursor-pointer", `bg${item.color}`, {
+                                return <div key={item.value} className={cn("h-8 w-8 rounded-full cursor-pointer shadow", `bg${item.color}`, {
                                     "ring ring-offset-1 ring-emerald-500": colors.includes(item.value)
                                 })}
                                 onClick={() => handleColors(item.value)}/>
                             })}
-                            {errors.colors ? <p className="text-sm text-red-400 mt-1">{errors.colors.message}</p> : null}
                         </div>
+                        {!colors.length ? <p className="text-xs font-semibold text-red-400 mt-1">Product must have atleast one color</p> : null}
                     </div>
                 </div>
 
@@ -212,8 +231,8 @@ const NewProudctForm = () => {
                 />
                 </div>
                 <div className="w-full grid grid-cols-4 gap-2 p-2 border border-dashed border-gray-400 min-h-20">
-                    {images.length ? images.map((item) => {
-                        return <div className="aspect-square bg-gray-300 rounded-md relative " >
+                    {images.length ? images.map((item, index) => {
+                        return <div className="aspect-square bg-gray-300 rounded-md relative" key={index} >
                             <Image src={item} fill alt="Uploaded image" />
                         </div>
                     }) : null}
@@ -221,7 +240,7 @@ const NewProudctForm = () => {
                 </div>
 
                 <Button className="w-full mt-4" type="submit">
-                    Save Product
+                    {isLoading ? <Loader2 className="animate-spin" /> : "Save Product"}
                 </Button>
             </form>
         </div>

@@ -6,7 +6,8 @@ import {
     primaryKey,
    integer,
    boolean,
-   pgEnum
+   pgEnum,
+   decimal
   } from "drizzle-orm/pg-core"
   import type { AdapterAccount } from '@auth/core/adapters'
 
@@ -26,7 +27,7 @@ import {
   export const products = pgTable("product", {
     id: text("id").notNull().primaryKey().$default(() => uuidv4()),
     title: text("title").notNull().unique(),
-    price: integer("price").notNull(),
+    price: decimal("price").notNull(),
     description: text("description").notNull(),
     collection: collectionEnum('collection'),
     sex: sexEnum('sex'),
