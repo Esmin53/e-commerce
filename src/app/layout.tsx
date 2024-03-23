@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "@uploadthing/react/styles.css";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";

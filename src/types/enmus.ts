@@ -1,0 +1,1 @@
+export const TSex = ['male', 'female', 'unisex']
