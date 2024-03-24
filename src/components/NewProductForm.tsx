@@ -114,7 +114,7 @@ const NewProudctForm = () => {
     } 
 
     return (
-        <div className="w-full h-full p-2 bg-slate-100 rounded-sm border border-slate-200 shadow-sm">
+        <div className="w-full h-full p-2 bg-white rounded-lg shadow">
             <div aria-hidden="true" className="bg-black bg-white bg-red-400 bg-gray-700 bg-gray-300 
             bg-yellow-400 bg-blue-400 bg-emerald-400 bg-pink-400 bg-purple-400 bg-orange-400" />
             <form className="flex flex-col gap-2"
@@ -133,7 +133,7 @@ const NewProudctForm = () => {
                     {errors.price ? <p className="text-sm text-red-400 mt-1">{errors.price.message}</p> : null}
                 </div>
 
-                <div className="w-full grid grid-cols-2 gap-4">
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
                     <div className="flex flex-col gap-1">
                         <Label>Sex</Label>
                         <Select onValueChange={(value) => {
@@ -174,8 +174,8 @@ const NewProudctForm = () => {
                     {errors.description ? <p className="text-sm text-red-400 mt-1">{errors.description.message}</p> : null}
                 </div>
 
-                <div className="flex gap-10">
-                    <div className="w-1/3 flex flex-col">
+                <div className="flex flex-col sm:flex-row sm:gap-10 gap-4">
+                    <div className="w-full sm:w-1/3 flex flex-col">
                         <Label>Sizes</Label>
                         <div className="w-full h-10 flex justify-between items-center">
                             {SIZES.map((item) => {
@@ -188,11 +188,11 @@ const NewProudctForm = () => {
                         {!sizes.length ? <p className="text-xs font-semibold text-red-400 mt-1">Product must have atleast on size</p> : null}
                     </div>
 
-                    <div className="w-2/3 flex flex-col">
-                        <Label>Colors</Label>
-                        <div className="w-full h-10 grid grid-cols-11 gap-2 items-center">
+                    <div className="w-full sm:w-2/3 flex flex-col">
+                        <Label className="mb-2">Colors</Label>
+                        <div className="w-full sm:h-10 grid grid-cols-6 sm:grid-cols-11 gap-3 items-center">
                             {COLORS.map((item) => {
-                                return <div key={item.value} className={cn("h-8 w-8 rounded-full cursor-pointer shadow", `bg${item.color}`, {
+                                return <div key={item.value} className={cn("lg:h-8  w-6 lg:w-8 h-6 rounded-full cursor-pointer shadow", `bg${item.color}`, {
                                     "ring ring-offset-1 ring-emerald-500": colors.includes(item.value)
                                 })}
                                 onClick={() => handleColors(item.value)}/>
@@ -230,7 +230,7 @@ const NewProudctForm = () => {
                 }}
                 />
                 </div>
-                <div className="w-full grid grid-cols-4 gap-2 p-2 border border-dashed border-gray-400 min-h-20">
+                <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 p-2 border border-dashed border-gray-400 min-h-20">
                     {images.length ? images.map((item, index) => {
                         return <div className="aspect-square bg-gray-300 rounded-md relative" key={index} >
                             <Image src={item} fill alt="Uploaded image" />

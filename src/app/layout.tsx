@@ -18,17 +18,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={`relative h-full antialiased ${inter.className}`}>
-        <main className="relative flex flex-col min-h-screen bg-background">
-          <Navbar />
-          <div className="flex-grow flex-1">
-            {children}
-          </div>
-        </main>
+<html lang="en" className="h-full">
+  <body className={`relative h-full antialiased min-h-screen ${inter.className}`}>
+    <main className="relative flex flex-col min-h-screen bg-background">
+      <Navbar />
+      <div className="flex-grow flex-1">
+        {children}
+      </div>
+    </main>
 
-        <Toaster richColors position="top-center"/>
-      </body>
-    </html>
+    <Toaster richColors position="top-center"/>
+  </body>
+</html>
   );
 }
