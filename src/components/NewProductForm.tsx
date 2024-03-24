@@ -5,7 +5,7 @@ import { Input } from "./ui/input"
 import { Label } from "./ui/label"
 import { Select, SelectContent, SelectItem } from "./ui/select"
 import { Textarea } from "./ui/textarea"
-import { COLORS, SIZES } from "@/config"
+import { CATEGORIES, COLORS, SIZES } from "@/config"
 import { cn } from "@/lib/utils"
 import { Button } from "./ui/button"
 import { useState } from "react"
@@ -19,6 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { ZodError } from "zod"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
+import { Switch } from "./ui/switch"
 
 const NewProudctForm = () => {
     const [colors, setColors] = useState<string[]>(["black"])
@@ -55,7 +56,7 @@ const NewProudctForm = () => {
         resolver: zodResolver(ProductValidator)
     })
 
-    const onSubmit: SubmitHandler<TProductValidator> = async ({title, price, description, sex, collection}) => {
+    const onSubmit: SubmitHandler<TProductValidator> = async ({title, price, description, sex, collection, category, featured}) => {
         setIsLoading(true)
         try {
             if(!images.length) {
@@ -79,6 +80,8 @@ const NewProudctForm = () => {
                     description,
                     sex,
                     collection,
+                    category,
+                    featured,
                     colors,
                     sizes,
                     images
@@ -127,7 +130,7 @@ const NewProudctForm = () => {
                 
                 <div>
                     <Label>Price</Label>
-                    <Input placeholder="Product price" step="0.02" type="number" {...register("price", {
+                    <Input placeholder="Product price" step="0.01" type="number" {...register("price", {
                         valueAsNumber: true
                     })}/>
                     {errors.price ? <p className="text-sm text-red-400 mt-1">{errors.price.message}</p> : null}
@@ -139,7 +142,7 @@ const NewProudctForm = () => {
                         <Select onValueChange={(value) => {
                             setValue("sex", value as "male" | "female" | "unisex")
                         }}>
-                        <SelectTrigger className="h-10 border border-input bg-background rounded-sm">
+                 <SelectTrigger className="h-10 border border-input bg-background rounded-sm">
                             Sex: {watch('sex')}
                         </SelectTrigger>
                         <SelectContent>
@@ -172,6 +175,26 @@ const NewProudctForm = () => {
                     <Label>Product Description</Label>
                     <Textarea placeholder="Product description" className="min-h-36" {...register("description")}/>
                     {errors.description ? <p className="text-sm text-red-400 mt-1">{errors.description.message}</p> : null}
+                </div>
+                <div className="w-full flex flex-col sm:flex-row gap-4 sm:gap-10">
+                    <div className="flex gap-2 items-center">
+                        <Label>Feature on the homepage: </Label>
+                        <Switch onCheckedChange={(checked) => setValue('featured', checked)}/>
+                    </div>
+                    <div className="flex-1">
+                        <Select onValueChange={(value) => {
+                            setValue('category', value)
+                        }}>
+                        <SelectTrigger className="h-10 border border-input bg-background rounded-sm w-full">
+                            Category: {watch('category')}
+                        </SelectTrigger>
+                        <SelectContent>
+                            {CATEGORIES.map(({label, value}) => (
+                                <SelectItem key={value} value={value}>{label}</SelectItem>
+                            ))}
+                        </SelectContent>
+                        </Select>
+                    </div>
                 </div>
 
                 <div className="flex flex-col sm:flex-row sm:gap-10 gap-4">

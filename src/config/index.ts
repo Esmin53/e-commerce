@@ -82,3 +82,50 @@ export const SIZES = [
         value: "xxl"
     },
 ]
+
+export const CATEGORIES = [
+    {
+        label: "Shirts",
+        value: "shirts"
+    },
+    {
+        label: "T-Shirts",
+        value: "tshirts"
+    },
+    {
+        label: "Pants",
+        value: "pants"
+    },
+    {
+        label: "Dresses",
+        value: "dresses"
+    },
+    {
+        label: "Jackets",
+        value: "jackets"
+    },
+    {
+        label: "Coats",
+        value: "coats"
+    },
+    {
+        label: "Sweaters",
+        value: "sweaters"
+    },
+    {
+        label: "Shoes",
+        value: "shoes"
+    },
+    {
+        label: "Boots",
+        value: "boots"
+    },
+    {
+        label: "Accesories",
+        value: "accesories"
+    },
+    {
+        label: "Glasses",
+        value: "glasses"
+    }
+]

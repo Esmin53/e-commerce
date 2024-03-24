@@ -16,7 +16,7 @@ export const POST = async (req: Request) => {
             throw new Error("Unauthorized")
         }
 
-        const {title, price, description, sex, collection, sizes, colors, images} = ProductValidator.parse(body);
+        const {title, price, description, sex, collection, sizes, colors, images, featured, category} = ProductValidator.parse(body);
 
         if(!sizes?.length || !colors?.length || !images?.length) {
             return new Response(JSON.stringify("BAD REQUEST"), { status: 400})
@@ -37,7 +37,9 @@ export const POST = async (req: Request) => {
             collection,
             sizes,
             colors,
-            images
+            images,
+            category,
+            isFeatured: featured
         }).returning({ createdProductId: products.id })
 
         return new Response(JSON.stringify({id: newProduct[0]?.createdProductId}), {status: 200})

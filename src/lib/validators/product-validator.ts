@@ -10,7 +10,9 @@ export const ProductValidator = z.object({
     sizes: z.array(z.string()).nonempty().optional(),
     colors: z.array(z.string()).nonempty().optional(),
     description: z.string().max(300, "Description must be under 300 characters"),
-    images: z.array(z.string()).optional()
+    images: z.array(z.string()).optional(),
+    featured: z.boolean().default(false),
+    category: z.string()
 
 })
 

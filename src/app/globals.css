@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
  
+body  {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

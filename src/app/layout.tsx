@@ -19,8 +19,8 @@ export default function RootLayout({
 }>) {
   return (
 <html lang="en" className="h-full">
-  <body className={`relative h-full antialiased min-h-screen ${inter.className}`}>
-    <main className="relative flex flex-col min-h-screen bg-background">
+  <body className={`relative h-full antialiased min-h-screen ${inter.className} bg-blue-50`}>
+    <main className="relative flex flex-col min-h-screen bg-blue-50">
       <Navbar />
       <div className="flex-grow flex-1">
         {children}
