@@ -1,4 +1,4 @@
-import { Cog, Home, Shirt, UserCog2, UserPlus2 } from "lucide-react"
+import { Cog, Home, Plus, Shirt, UserCog2, UserPlus2 } from "lucide-react"
 
 
 const DashboardNavigation = () => {
@@ -11,11 +11,11 @@ const DashboardNavigation = () => {
                     <p className="hidden lg:block">Overview</p>
                 </li>
                 <li className="p-2 text-gray-800 xl:text-lg hover:bg-slate-100 rounded-sm cursor-pointer flex items-center gap-2">
-                    <Shirt />
+                    <Plus />
                     <p className="hidden lg:block">Add new product</p>
                 </li>
                 <li className="p-2 text-gray-800 xl:text-lg hover:bg-slate-100 rounded-sm cursor-pointer flex items-center gap-2">
-                    <Cog />
+                    <Shirt />
                     <p className="hidden lg:block">Manage products</p>
                 </li>
                 <li className="p-2 text-gray-800 xl:text-lg hover:bg-slate-100 rounded-sm cursor-pointer flex items-center gap-2">
