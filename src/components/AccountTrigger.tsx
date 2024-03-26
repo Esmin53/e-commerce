@@ -1,6 +1,6 @@
 "use client"
 
-import { FileBarChart, LogIn, LogOut, User, UserPlus } from "lucide-react"
+import { ChevronDown, FileBarChart, LogIn, LogOut, User, UserPlus } from "lucide-react"
 import { Popover, PopoverTrigger } from "./ui/popover"
 import { PopoverContent } from "@radix-ui/react-popover"
 import { SessionUser } from "@/types/next-auth"
@@ -11,8 +11,9 @@ const AccountTrigger = ({user}: SessionUser) => {
 
     return (
         <Popover>
-            <PopoverTrigger className="">
-                <User />
+            <PopoverTrigger className="cursor-pointer flex items-center justify-center gap-1 rounded-2xl border border-slate-300 shadow-sm p-1">
+                <User  className="w-4 h-4 sm:w-5 sm:h-5"/>
+                <ChevronDown  className="w-4 h-4 sm:w-5 sm:h-5"/>
             </PopoverTrigger>
             <PopoverContent className="z-40 bg-slate-50 w-56 p-2 flex flex-col gap-2 rounded-sm border border-gray-200 mt-2 -ml-6">
                 <h2 className="text-lg text-gray-900 pb-1 border-b border-gray-200">My Account</h2>

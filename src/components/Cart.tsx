@@ -8,7 +8,7 @@ const Cart = () => {
     return (
         <Sheet>
             <SheetTrigger>
-                <ShoppingBasket />
+                <ShoppingBasket className="w-5 h-5 sm:w-6 sm:h-6"/>
             </SheetTrigger>
             <SheetContent>
                 <SheetHeader>
