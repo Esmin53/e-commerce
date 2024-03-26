@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss"
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 const config = {
   darkMode: ["class"],
@@ -16,6 +17,7 @@ const config = {
       screens: {
         "xs": "395px",
         "2xl": "1400px",
+        ...defaultTheme.screens,
       },
     },
     extend: {
@@ -29,6 +31,7 @@ const config = {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
         },
+        
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",

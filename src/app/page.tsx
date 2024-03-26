@@ -20,15 +20,11 @@ export default async function Home() {
       <HomepageCarousel />
       <div className="w-full p-2 mt-6">
         <h1 className="text-xl py-2">Featured Products</h1>
-        <div className="grid grid-cols-4 gap-2">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+        <div className="grid grid-cols-4 gap-4">
+          {featuredProducts?.map((item) => (
+            <ProductCard key={item.id} product={item}/>
+          ))}
+
         </div>
       </div>
 
