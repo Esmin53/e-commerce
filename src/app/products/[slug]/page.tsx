@@ -61,7 +61,7 @@ const Page = async ({params}: PageParams) => {
                         <p>{product.collection} collection</p>
                         <p className="capitalize">{product.sex}</p>
                     </div>
-                    <AddToCartButton id={product.id} sizes={product.sizes} colors={product.colors} />
+                    <AddToCartButton product={product} />
                 </div>
             </div>
         </MaxWidthWrapper>
