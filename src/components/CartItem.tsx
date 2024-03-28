@@ -1,15 +1,16 @@
 "use client"
 
 import { useCart } from "@/hooks/use-cart";
+import { TColor, TSize } from "@/types/enmus";
 import Image from "next/image";
 
 interface CartItemProps {
     product: {
         id: string;
         title: string;
-        image: string;
-        color: string;
-        size: string;
+        image: string ;
+        color: string | TColor;
+        size: string | TSize;
         price: string;
     }
 }
