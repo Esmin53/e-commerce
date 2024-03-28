@@ -13,7 +13,8 @@ export type CartItem = {
         image: string,
         color: string,
         size: string,
-        price: string
+        price: string,
+        priceId: string
     } 
 }
 
@@ -25,7 +26,8 @@ type CartState = {
         image: string,
         color: string,
         size: string,
-        price: string
+        price: string,
+        priceId: string
     } ) => void,
     removeItem: (productId: string) => void,
     clearCart: () => void

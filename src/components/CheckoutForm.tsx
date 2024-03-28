@@ -1,6 +1,7 @@
 import { useCart } from "@/hooks/use-cart"
 import { Button } from "./ui/button"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 
 const CheckoutForm = () => {
@@ -12,16 +13,18 @@ const CheckoutForm = () => {
 
     const handleCheckout = async () => {
         try {
-            
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/payment`, {
                 method: "POST",
                 body: JSON.stringify(items)
             })
+                if(!response.ok) {
+                    toast.error("Something went wrong. Please try again later.")
+                    return
+                }
 
             const data = await response.json()
 
             router.push(data.url)
-            console.log(data)
         } catch (error) {
             console.log(error)
         }

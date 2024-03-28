@@ -50,6 +50,20 @@
       "when": 1711580932782,
       "tag": "0006_keen_lady_bullseye",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1711589678249,
+      "tag": "0007_military_inhumans",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1711590018909,
+      "tag": "0008_free_loners",
+      "breakpoints": true
     }
   ]
 }

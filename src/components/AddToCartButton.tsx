@@ -61,7 +61,8 @@ const AddToCartButton = ({product}: AddToCartButtonProps) => {
                     image: product.images[0],
                     color: picekedColor,
                     size: pickedSize,
-                    price: product.price
+                    price: product.price,
+                    priceId: product.price_id
                 })
                 setIsSuccess(true)
             }} disabled={isSuccess}>{isSuccess ? "Item added to cart" : "Add To Cart"}</Button>

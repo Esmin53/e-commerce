@@ -10,13 +10,15 @@ import {
    decimal
   } from "drizzle-orm/pg-core"
   import type { AdapterAccount } from '@auth/core/adapters'
+import { relations } from 'drizzle-orm';
 
   export const collectionEnum = pgEnum('collection', ['summer', 'winter']);
   export const sexEnum = pgEnum('sex', ['male', 'female', 'unisex']);
   export const colorsEnum = pgEnum('colors', ['black', 'white', 'gray', 'lightgray', 'red', 'yellow', 'blue', 'green', 'pink', 'purple', 'orange'])
   export const sizesEnum = pgEnum('sizes', ['xs', 's', 'm', 'l', 'xl', 'xxl'])
   export const categoriesEnum = pgEnum('categories', ['shirts', 'tshirts', 'pants', 'dresses', 'shoes', 'boots', 'glasses', 'jackets', 'coats', 'sweaters', 'accesories'])
-  
+  export const orderStatusEnum = pgEnum('order_status', ['payment_pending', 'payment_successful', 'in_shipping', 'delivered', 'canceled'])
+
   export const users = pgTable("user", {
    id: text("id").notNull().primaryKey().$default(() => uuidv4()),
    username: text("name").unique().notNull(),
@@ -24,6 +26,9 @@ import {
    isAdmin: boolean("isAdmin").notNull().default(false),   
   })
   
+  export const userRelations = relations(users, ({many}) => ({
+    orders: many(orders)
+  }))
 
   export const products = pgTable("product", {
     id: text("id").notNull().primaryKey().$default(() => uuidv4()),
@@ -40,3 +45,43 @@ import {
     stripe_id: text("stripe_id").notNull(),
     price_id: text("price_id").notNull()
   })
+
+  export const productsRelations = relations(products, ({many}) => ({
+    orderInfo: many(orderInfo)
+  }))
+
+  export const orders = pgTable("orders", {
+    id: text("id").notNull().primaryKey().$default(() => uuidv4()),
+    userId: text("user_id").references(() => users.id),
+    products: text("product_id").references(() => products.id),
+    isPaid: boolean("is_paid").default(false),
+    orderStatus: orderStatusEnum('order_status').default('payment_pending')
+  })
+
+  export const orderRelations= relations(orders, ({one, many}) => ({
+    user: one(users, {
+      fields: [orders.userId],
+      references: [users.id]
+    }),
+    orderInfos: many(orderInfo)
+  }))
+
+  export const orderInfo = pgTable("orderInfo", {
+    id: text("id").notNull().primaryKey().$default(() => uuidv4()),
+    orderId: text("order_id").references(() => orders.id) ,
+    productId: text("product_id").references(() => products.id),
+    color: colorsEnum("color").notNull(),
+    size: sizesEnum("size").notNull(),
+
+})
+
+export const orderInfoRelations = relations(orderInfo, ({ one }) => ({
+  order: one(orders, {
+    fields: [orderInfo.orderId],
+    references: [orders.id]
+  }),
+  products: one(products, {
+    fields: [orderInfo.productId],
+    references: [products.id]
+  })
+}))
