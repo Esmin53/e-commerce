@@ -36,5 +36,7 @@ import {
     colors: colorsEnum('colors').array().notNull(),
     images: text('images').array().notNull(),
     category: categoriesEnum('categories').notNull(),
-    isFeatured: boolean('isFeatured').notNull().default(false)
+    isFeatured: boolean('isFeatured').notNull().default(false),
+    stripe_id: text("stripe_id").notNull(),
+    price_id: text("price_id").notNull()
   })
