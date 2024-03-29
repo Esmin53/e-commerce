@@ -11,8 +11,6 @@ export const GET = async  (req: Request) => {
 
         const productId = pathname.split('/')[4]
 
-        console.log(productId)
-
         const [{
             paidOrders,
             totalRevenue
