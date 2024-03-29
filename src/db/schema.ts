@@ -23,7 +23,9 @@ import { relations } from 'drizzle-orm';
    id: text("id").notNull().primaryKey().$default(() => uuidv4()),
    username: text("name").unique().notNull(),
    password: text("password").notNull(),
-   isAdmin: boolean("isAdmin").notNull().default(false),   
+   isAdmin: boolean("isAdmin").notNull().default(false),
+   createdAt: timestamp("created_at").defaultNow().notNull(),
+   updatedAt: timestamp("updated_at").defaultNow().notNull()   
   })
   
   export const userRelations = relations(users, ({many}) => ({
@@ -43,7 +45,9 @@ import { relations } from 'drizzle-orm';
     category: categoriesEnum('categories').notNull(),
     isFeatured: boolean('isFeatured').notNull().default(false),
     stripe_id: text("stripe_id").notNull(),
-    price_id: text("price_id").notNull()
+    price_id: text("price_id").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   })
 
   export const productsRelations = relations(products, ({many}) => ({
@@ -55,7 +59,9 @@ import { relations } from 'drizzle-orm';
     userId: text("user_id").references(() => users.id),
     products: text("product_id").references(() => products.id),
     isPaid: boolean("is_paid").default(false),
-    orderStatus: orderStatusEnum('order_status').default('payment_pending')
+    orderStatus: orderStatusEnum('order_status').default('payment_pending'),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull()
   })
 
   export const orderRelations= relations(orders, ({one, many}) => ({
@@ -72,6 +78,8 @@ import { relations } from 'drizzle-orm';
     productId: text("product_id").references(() => products.id),
     color: colorsEnum("color").notNull(),
     size: sizesEnum("size").notNull(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
 
 })
 
