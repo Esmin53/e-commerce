@@ -3,13 +3,17 @@
 import { AlignVerticalDistributeCenter, ArrowLeftFromLine, ChevronDown } from "lucide-react";
 import { Accordion, AccordionTrigger, AccordionContent, AccordionItem } from "./ui/accordion";
 import { CATEGORIES, COLORS, SIZES } from "@/config";
-import { Button } from "./ui/button";
+import { Button, buttonVariants } from "./ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
+interface FiltersProps {
+    redirectUrl: string
+}
 
-const Filters = () => {
+const Filters = ({redirectUrl}: FiltersProps) => {
     const router = useRouter()
     const searchParams = useSearchParams()
 
@@ -111,10 +115,10 @@ const Filters = () => {
                     })} onClick={() => setCollection(collection === "winter" ? "" : "winter")}>Winter</div>
                 </div>
             </div>
-            <Button variant="secondary">Clear all filters</Button>
+            <Link  href={`${process.env.NEXT_PUBLIC_SERVER_URL}/${redirectUrl}`} className={buttonVariants({variant: "secondary"})}>Clear all filters</Link>
             <Button onClick={() => {
                 router.push('/')
-                router.push(`${process.env.NEXT_PUBLIC_SERVER_URL}/products?${category.length ? `category=${category}&` : ""}${size.length ? `size=${size}&` : ""}${sex.length ? `sex=${sex}&` : ""}${clr.length ? `color=${clr}&` : ""}${collection.length ? `collection=${collection}&` : ""}${orderBy ? `orderBy=${orderBy}&` : ""}`)
+                router.push(`${process.env.NEXT_PUBLIC_SERVER_URL}/${redirectUrl}?${category.length ? `category=${category}&` : ""}${size.length ? `size=${size}&` : ""}${sex.length ? `sex=${sex}&` : ""}${clr.length ? `color=${clr}&` : ""}${collection.length ? `collection=${collection}&` : ""}${orderBy ? `orderBy=${orderBy}&` : ""}`)
                 router.refresh()
             }}>Apply Filters</Button>
             </div>

@@ -7,12 +7,12 @@ export const ProductValidator = z.object({
     price: z.number().positive(),
     sex: z.enum(['male', 'female', 'unisex']),
     collection: z.enum(['summer', 'winter']),
-    sizes: z.array(z.string()).nonempty().optional(),
-    colors: z.array(z.string()).nonempty().optional(),
+    sizes: z.array(z.enum(['xs', 's', 'm', 'l', 'xl', 'xxl'])).nonempty().optional(),
+    colors: z.array(z.enum(['black', 'white', 'gray', 'lightgray', 'red', 'yellow', 'blue', 'green', 'pink', 'purple', 'orange'])).nonempty().optional(),
     description: z.string().max(300, "Description must be under 300 characters"),
     images: z.array(z.string()).optional(),
     featured: z.boolean().default(false),
-    category: z.string()
+    category: z.enum(['shirts', 'tshirts', 'pants', 'dresses', 'shoes', 'boots', 'glasses', 'jackets', 'coats', 'sweaters', 'accesories'])
 
 })
 

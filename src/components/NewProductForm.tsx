@@ -20,6 +20,7 @@ import { ZodError } from "zod"
 import { useRouter } from "next/navigation"
 import { Loader2 } from "lucide-react"
 import { Switch } from "./ui/switch"
+import { TCategory } from "@/types/enmus"
 
 const NewProudctForm = () => {
     const [colors, setColors] = useState<string[]>(["black"])
@@ -183,7 +184,7 @@ const NewProudctForm = () => {
                     </div>
                     <div className="flex-1">
                         <Select onValueChange={(value) => {
-                            setValue('category', value)
+                            setValue('category', value as TCategory)
                         }}>
                         <SelectTrigger className="h-10 border border-input bg-background rounded-sm w-full">
                             Category: {watch('category')}

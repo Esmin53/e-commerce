@@ -33,9 +33,9 @@ const Page = async ({params, searchParams}: ProductsProps) => {
                 <h1 className="text-3xl font-bold text-gray-900">Explore all products</h1>
             </div>
             <div className="w-full flex flex-col sm:flex-row p-2 gap-2 sm:gap-8 relative">
-                <Filters />
+                <Filters redirectUrl="products"/>
                 <div className="flex-1 flex flex-col gap-2">
-                    <ResultsFilter queryString={queryString.toString()}/>
+                    <ResultsFilter queryString={queryString.toString()} redirectUrl="products"/>
                     <div className="w-full flex p-1 gap-2">
                         <p className="text-xl font-semibold">Results: </p>
                     </div>
