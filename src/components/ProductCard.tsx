@@ -9,12 +9,12 @@ interface ProductCardProps {
 const ProductCard = ({product}: ProductCardProps) => {
 
     return (
-        <Link href={`/products/${product.id}`} className="w-full gap-2  relative ">
+        <Link href={`/products/${product.id}`} className="w-full gap-2  relative max-w-96 mx-auto">
           <div className="w-full h-60 relative ">
             <Image src={product.images[0]} fill alt="product image"/>
           </div>
         <div className="flex w-full justify-between pt-2 px-1">
-          <p className="text-gray-900 font-semibold">{product.title}</p>
+          <p className="text-gray-900 font-medium">{product.title}</p>
           <h2 className="text-xl font-bold">${product?.price}</h2>
         </div>
         <div className="w-full flex justify-between px-1 pb-2">

@@ -18,9 +18,10 @@ export default async function Home() {
   return (
     <MaxWidthWrapper>
       <HomepageCarousel />
-      <div className="w-full p-2 mt-6">
-        <h1 className="text-xl py-2">Featured Products</h1>
-        <div className="grid grid-cols-4 gap-4">
+      <div className="w-full p-2 mt-6 text-gray-600">
+        <p className="text-sm font-medium text-gray-600">Featured Products</p>
+        <h1 className="text-2xl py-2 text-gray-900 font-semibold">Our High Quality Featured Products</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 ">
           {featuredProducts?.map((item) => (
             <ProductCard key={item.id} product={item}/>
           ))}
