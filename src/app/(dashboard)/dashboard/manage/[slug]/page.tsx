@@ -32,6 +32,10 @@ const Page = () => {
         try {
             const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/products/${productId}`)
 
+            if(!response.ok) {
+                return notFound()
+            }
+
             const data = await response.json()
 
             setProduct(data)
@@ -45,7 +49,17 @@ const Page = () => {
     }, [])
 
     if(!product) {
-        return <div>Sui</div>
+        return <div className="w-full">
+        <Heading subtitle="Upadate product general info" title="Manage Products" />
+        <div className="w-full flex flex-col md:flex-row gap-4 lg:gap-8">
+            <div className="bg-white border border-slate-200 shadow animate-pulse w-full md:w-80 min-h-96">
+
+            </div>
+            <div className="bg-white border border-slate-200 shadow animate-pulse flex-1 min-h-96">
+
+            </div>
+        </div>
+    </div>
     }
 
     const handleColors = (color: TColor) => {
