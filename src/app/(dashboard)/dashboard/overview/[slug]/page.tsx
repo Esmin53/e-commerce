@@ -5,7 +5,7 @@ import PieChartComponent from "@/components/charts/PieChart";
 import { products } from "@/db/schema";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { CircleDollarSign, Clock10, DollarSign, Package, PackageOpen, Shirt } from "lucide-react";
+import { AreaChartIcon, BarChart2, CircleDollarSign, Clock10, DollarSign, Package, PackageOpen, PieChart, Shirt } from "lucide-react";
 import Image from "next/image";
 
 
@@ -71,7 +71,10 @@ const Page = async ({params}: PageParams) => {
                     </div>
                     <Heading subtitle={`Sales data for ${slug}`} title="Revenue and Sales" />
                     <div className="flex flex-col gap-2 p-2">
-
+                        <div className="w-[95%] ml-auto flex justify-between items-end pb-2 border-b-2 border-slate-200">
+                                <p className="font-medium text-gray-600">Annual Sales</p>
+                                <AreaChartIcon className="text-gray-700"/>
+                            </div>
                         <div className="h-56 sm:h-72 md:h-80 w-full">
                             <AreaChartComponent chartData={data.chartData}/>
                         </div>
@@ -79,10 +82,22 @@ const Page = async ({params}: PageParams) => {
                     <Heading subtitle="Overview sales by colors and sizes" title="Colors and Sizes" />
                     <div className="w-full flex flex-col sm:flex-row gap-6 sm:gap-2 h-[30rem] sm:h-72 ">
                         <div className="w-full sm:w-1/2 lg:w-1/3">
-                            <PieChartComponent colors={data.colorsArray}/>
+                            <div className="w-full hidden sm:flex justify-between items-endpb-2 border-b-2 border-slate-200">
+                                <p className="font-medium text-gray-600">Colors</p>
+                                <PieChart className="text-gray-700"/>
+                            </div>
+                            <div className="w-full h-full">
+                                <PieChartComponent colors={data.colorsArray}/>
+                            </div>
                         </div>
                         <div className="w-full sm:w-1/2 lg:w-2/3 min-h-56">
-                            <BarChartComponent sizes={data.sizesArray}/>
+                            <div className="w-[92.5%] ml-auto hidden sm:flex justify-between items-end pb-2 border-b-2 border-slate-200">
+                                <p className="font-medium text-gray-600">Sizes</p>
+                                <BarChart2 className="text-gray-700"/>
+                            </div>
+                            <div className="w-full h-full">
+                                <BarChartComponent sizes={data.sizesArray}/>
+                            </div>
                         </div>
                     </div>
                 </div>

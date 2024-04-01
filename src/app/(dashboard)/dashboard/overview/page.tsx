@@ -2,7 +2,7 @@ import Admins from "@/components/Admins";
 import Heading from "@/components/Heading";
 import Orders from "@/components/Orders";
 import AreaChartComponent from "@/components/charts/AreaChart";
-import { Clock10, DollarSign, Package, PackageCheck, PackageOpen, Shirt } from "lucide-react";
+import { AreaChartIcon, Clock10, DollarSign, Package, PackageCheck, PackageOpen, Shirt } from "lucide-react";
 
 
 const Page = async () => {
@@ -80,9 +80,16 @@ const Page = async () => {
                             </div>
                         </div>
                     </div>
-                    <div className="h-56 sm:h-72 md:h-80 w-full py-6">
-                         <AreaChartComponent chartData={data.dataArray} />
-                     </div>
+                    <div className="flex flex-col gap-2 p-2">
+                        <div className="w-full ml-auto flex justify-between items-end pb-2 border-b-2 border-slate-200">
+                            <p className="font-medium text-gray-600">Annual Sales</p>
+                            <AreaChartIcon className="text-gray-700"/>
+                        </div>
+                        <div className="h-56 sm:h-72 md:h-80 w-full py-2">
+                            <AreaChartComponent chartData={data.dataArray} />
+                        </div>
+                    </div>
+
                 <Heading subtitle="Manage and Create Admins" title="Admins"/>
                 <Admins />
                 <Heading subtitle="Manage Orders" title="Orders"/>  

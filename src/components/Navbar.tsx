@@ -1,6 +1,6 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import { ChevronDown, Search, ShoppingBasket, User } from "lucide-react";
+import { BarChart2, GanttChartSquare, PieChart, ScatterChart } from "lucide-react";
 import AccountTrigger from "./AccountTrigger";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth";
@@ -16,7 +16,7 @@ const Navbar = async () => {
         <div className="w-full h-12 sm:h-16">
             <MaxWidthWrapper className="px-2 h-full">
                 <div className="flex w-full h-full items-center justify-between">
-                    <h1>Ecommerce</h1>
+                    <Link href={'/'} className="text-primary font-medium">Ecommerce</Link>
                     <ul className="hidden sm:flex items-center justfy-center gap-2 lg:gap-4 text-gray-800">
                         <li className="cursor-pointer hover:font-semibold">
                             <Link href='/'>Home</Link>
@@ -32,9 +32,15 @@ const Navbar = async () => {
                         </li>
                     </ul>
                     <ul className="flex gap-2 lg:gap-4 h-full items-center py-3 sm:py-5">
-                        <li className="cursor-pointer flex h-full items-center">
+                        {session?.user.isAdmin ? (
+                            <li className="cursor-pointer flex h-full items-center">
+                                <Link href='/dashboard/overview'>
+                                    <PieChart />
+                                </Link>
+                             </li>
+                        ) : (<li className="cursor-pointer flex h-full items-center">
                             <Cart />
-                        </li>
+                        </li>)}
                         <div className="w-px h-full shadow border-l border-gray-300" />
                         <li className="flex h-full items-center">
                             <AccountTrigger user={session?.user}/>

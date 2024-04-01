@@ -1,9 +1,17 @@
 import DashboardNavigation from "@/components/DashboardNavigation"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
+import authOptions from "@/lib/auth"
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 import { PropsWithChildren } from "react"
 
 
-const DashboardLayout = ({children}: PropsWithChildren) => {
+const DashboardLayout = async ({children}: PropsWithChildren) => {
+    const session = await getServerSession(authOptions)
+
+    if(!session || session.user.isAdmin === false) {
+        redirect("/")
+    }
 
     return ( 
         <div className="flex gap-2 h-full bg-blue-50">
