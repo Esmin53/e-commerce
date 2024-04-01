@@ -1,6 +1,7 @@
 import Admins from "@/components/Admins";
 import Heading from "@/components/Heading";
 import Orders from "@/components/Orders";
+import AreaChartComponent from "@/components/charts/AreaChart";
 import { Clock10, DollarSign, Package, PackageCheck, PackageOpen, Shirt } from "lucide-react";
 
 
@@ -11,6 +12,8 @@ const Page = async () => {
     })
 
     const data = await response.json()
+
+    console.log("Overview: ", data)
 
     return (
         <div className="flex-1 w-full h-full flex flex-col gap-4">
@@ -39,7 +42,7 @@ const Page = async () => {
                 </div>
 
             </div>
-            <div className="w-full grid grid-cols-1 sm:grid-cols-4 gap-2">
+            <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2">
                         <div className="h-18 sm:h-24 bg-white shadow border border-gray-200 rounded-sm flex items-center p-2 gap-2">
                             <div className="p-2 w-8 h-8 rounded-full bg-slate-200 shadow flex items-center justify-center">
                                 <Shirt />
@@ -77,6 +80,9 @@ const Page = async () => {
                             </div>
                         </div>
                     </div>
+                    <div className="h-56 sm:h-72 md:h-80 w-full py-6">
+                         <AreaChartComponent chartData={data.dataArray} />
+                     </div>
                 <Heading subtitle="Manage and Create Admins" title="Admins"/>
                 <Admins />
                 <Heading subtitle="Manage Orders" title="Orders"/>  

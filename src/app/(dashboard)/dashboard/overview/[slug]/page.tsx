@@ -71,17 +71,17 @@ const Page = async ({params}: PageParams) => {
                     </div>
                     <Heading subtitle={`Sales data for ${slug}`} title="Revenue and Sales" />
                     <div className="flex flex-col gap-2 p-2">
-                        <h2 className="text-lg font-medium text-gray-900 pl-4">Sales Data</h2>
+
                         <div className="h-56 sm:h-72 md:h-80 w-full">
                             <AreaChartComponent chartData={data.chartData}/>
                         </div>
                     </div>
                     <Heading subtitle="Overview sales by colors and sizes" title="Colors and Sizes" />
-                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-2 h-[30rem] sm:h-72 ">
-                        <div className="">
+                    <div className="w-full flex flex-col sm:flex-row gap-6 sm:gap-2 h-[30rem] sm:h-72 ">
+                        <div className="w-full sm:w-1/2 lg:w-1/3">
                             <PieChartComponent colors={data.colorsArray}/>
                         </div>
-                        <div className="">
+                        <div className="w-full sm:w-1/2 lg:w-2/3 min-h-56">
                             <BarChartComponent sizes={data.sizesArray}/>
                         </div>
                     </div>

@@ -91,7 +91,7 @@ const NewAdminForm = () => {
                     <Input type="password" placeholder="Confirm password" {...register("confirmPassword")}/>
                     {confirmPasswordError ? <p className="text-xs font-semibold text-red-500">Confirm password and password fields must match.</p> : null}
                 </div>
-                <Button type="submit" className="w-full mt-4 sm:mt-8 mb-1">Sign up</Button>
+                <Button type="submit" className="w-full mt-4 sm:mt-8 mb-1">Create new Admin</Button>
             </form>
         </div>
     )

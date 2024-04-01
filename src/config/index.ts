@@ -31,7 +31,7 @@ export const COLORS = [
     },
     {
         label: "Blue",
-        value: "glue",
+        value: "blue",
         color: "-blue-400"
     },
     {

@@ -7,8 +7,6 @@ const Orders = async () => {
 
     const ordersArray = await db.select().from(orders)
 
-    console.log(ordersArray)
-
     return (
         <div className="w-full bg-white p-2 shadow border border-slate-200 rounded-sm gap-2 flex flex-col">
             <div className="flex justify-between border-b border-slate-200 pb-1 flex-col">
