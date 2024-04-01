@@ -1,11 +1,13 @@
 import Heading from "@/components/Heading";
 import AreaChartComponent from "@/components/charts/AreaChart";
-import AreaChart from "@/components/charts/AreaChart";
+import BarChartComponent from "@/components/charts/BarChart";
+import PieChartComponent from "@/components/charts/PieChart";
 import { products } from "@/db/schema";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { CircleDollarSign, Clock10, DollarSign, Package, PackageOpen, Shirt } from "lucide-react";
 import Image from "next/image";
+
 
 interface PageParams  {
     params: {
@@ -27,8 +29,6 @@ const Page = async ({params}: PageParams) => {
     })
 
     const data = await response.json()
-
-    console.log("DATA", data)
 
     return (
         <div className="flex flex-col gap-6">
@@ -70,10 +70,19 @@ const Page = async ({params}: PageParams) => {
                         </div>
                     </div>
                     <Heading subtitle={`Sales data for ${slug}`} title="Revenue and Sales" />
-                    <div className="flex flex-col gap-2 border border-gray-200 bg-white shadow p-2">
+                    <div className="flex flex-col gap-2 p-2">
                         <h2 className="text-lg font-medium text-gray-900 pl-4">Sales Data</h2>
                         <div className="h-56 sm:h-72 md:h-80 w-full">
                             <AreaChartComponent chartData={data.chartData}/>
+                        </div>
+                    </div>
+                    <Heading subtitle="Overview sales by colors and sizes" title="Colors and Sizes" />
+                    <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-2 h-[30rem] sm:h-72 ">
+                        <div className="">
+                            <PieChartComponent colors={data.colorsArray}/>
+                        </div>
+                        <div className="">
+                            <BarChartComponent sizes={data.sizesArray}/>
                         </div>
                     </div>
                 </div>

@@ -129,3 +129,19 @@ export const CATEGORIES = [
         value: "glasses"
     }
 ]
+
+export const HEX: {
+    [key: string]: string
+} = {
+    black: "#000000",
+    white: "#FFF",
+    gray: "#374151",
+    lightgray: "#D1D5DB",
+    red: "#F87171",
+    yellow: "#FACC15",
+    blue: "#60A5FA",
+    green: "#34D399",
+    pink: "#F472B6",
+    purple: "#C084FC",
+    orange: "#FB923C"
+}

@@ -3,6 +3,7 @@ import { db } from "@/lib/db"
 import { and, eq, sql, sum } from "drizzle-orm"
 import {eachMonthOfInterval, format, getMonth} from "date-fns"
 import { number } from "zod"
+import { SIZES } from "@/config"
 
 export const GET = async  (req: Request) => {
     try {
@@ -47,30 +48,30 @@ export const GET = async  (req: Request) => {
 
         const monthsOfYear = eachMonthOfInterval({ start: new Date(2024, 0, 1), end: new Date(2024, 11, 31) });
         const dataMap: Map<string, { revenue: number }> = new Map(monthsOfYear.map(month => [format(month, 'MMMM'), { revenue: 0 }]));
-        
-        for (const item of productsData) {
-            const monthName = format(item.createdAt, 'MMMM');
-            const existingData = dataMap.get(monthName);
-            if (existingData) {
-                dataMap.set(monthName, {
-                    revenue: existingData.revenue + Number(item.price)
-                });
-            }
-        }
+        let colorsArray = []
+        const sizesMap: Map<string, {count: number }> = new Map(SIZES.map(size => [size.value, { count: 0}]))
+
         for (const item of productsData) {
             const monthName = format(item.createdAt, 'MMMM');
             const existingData = dataMap.get(monthName) || { revenue: 0 };
+            colorsArray.push(item.color)
+            const existingSizes = sizesMap.get(item.size) || {count: 0}
             if (existingData !== undefined) {
                 const currentRevenue = existingData.revenue || 0;
+                const existingCount = existingSizes.count ||0
                 dataMap.set(monthName, {
                     revenue: currentRevenue + Number(item.price)
                 });
+                sizesMap.set(item.size, {
+                    count: existingCount + 1
+                })
             }
         }
 
-        const dataArray = Array.from(dataMap, ([name, { revenue }]) => ({ name, revenue: revenue / 2 }));
+        const dataArray = Array.from(dataMap, ([name, { revenue }]) => ({ name, revenue }));
+        const sizesArray = Array.from(sizesMap, ([name, {count}]) => ({name, count}))
 
-        return new Response(JSON.stringify({paidOrders, upcomingRevenue, totalRevenue, chartData: dataArray}))
+        return new Response(JSON.stringify({paidOrders, upcomingRevenue, totalRevenue, chartData: dataArray, colorsArray, sizesArray}))
 
     } catch (error) {
         

@@ -29,6 +29,8 @@ export const GET = async () => {
             productsCount: sql<number>`cast(count(${products.id}) as int)`
         }).from(products)
 
+        
+
         return new Response(JSON.stringify({ totalRevenue, 
                 upcomingRevenue, 
                 paidOrders, 
