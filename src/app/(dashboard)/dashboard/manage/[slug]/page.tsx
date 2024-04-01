@@ -1,5 +1,6 @@
 "use client"
 
+import Heading from "@/components/Heading"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -98,6 +99,7 @@ const Page = () => {
 
     return (
         <div className="w-full">
+            <Heading subtitle="Upadate product general info" title="Manage Products" />
             <form className="w-full flex flex-col md:flex-row gap-4 lg:gap-8">
                 <div className="flex flex-col bg-white border border-slate-200 shadow p-2 gap-4 w-full md:w-80 pb-4">
                     <h1 className="text-lg font-medium pb-1 border-b border-slate-200">General information</h1>

@@ -21,10 +21,10 @@ const AccountTrigger = ({user}: SessionUser) => {
                     user ? (
                         <ul className="flex flex-col gap-2">
                             {user?.isAdmin ? (
-                            <li className="flex w-full items-center justify-between hover:bg-slate-100 p-2">
+                            <Link href='/dashboard/overview' className="flex w-full items-center justify-between hover:bg-slate-100 p-2">
                                 <p>Dashboard</p>
                                 <FileBarChart className="w-5 h-5 text-gray-700"/>
-                            </li>
+                            </Link>
                             ) : null}
                             <li className="flex w-full items-center justify-between hover:bg-slate-100 p-2"
                             onClick={() => signOut()}>

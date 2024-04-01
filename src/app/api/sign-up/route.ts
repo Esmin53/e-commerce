@@ -8,7 +8,7 @@ export const POST = async (req: Request) => {
     try {
         const body = await req.json()
 
-        const { username, password } = AuthCredentialsValidator.parse(body)
+        const { username, password, isAdmin } = AuthCredentialsValidator.parse(body)
 
         const isUsernameTaken = await db.select().from(users).where(eq(users.username, username)).limit(1)
 
@@ -18,7 +18,11 @@ export const POST = async (req: Request) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        await db.insert(users).values({username, password: hashedPassword})
+        await db.insert(users).values({
+            username,
+             password: hashedPassword,
+            isAdmin
+        })
 
         return new Response(JSON.stringify({success: true}), { status: 200})
     } catch (error) {

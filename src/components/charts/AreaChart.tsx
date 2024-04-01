@@ -11,8 +11,6 @@ interface AreaChartProps {
 
 const AreaChartComponent = ({chartData}: AreaChartProps) => {
 
-    console.log("Chart Data: ", chartData)
-
     return (
         <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chartData}>
@@ -20,7 +18,7 @@ const AreaChartComponent = ({chartData}: AreaChartProps) => {
             <XAxis dataKey="name" />
             <YAxis />
             <Tooltip />
-            <Area type="monotone" dataKey="revenue" stroke="#8884d8" fill="#6A0DAD" />
+            <Area type="monotone" dataKey="revenue" stroke="#E11D48" fill="#E11D48" />
             </AreaChart>
         </ResponsiveContainer>
     )

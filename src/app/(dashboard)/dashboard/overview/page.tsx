@@ -1,3 +1,5 @@
+import Admins from "@/components/Admins";
+import Heading from "@/components/Heading";
 import Orders from "@/components/Orders";
 import { Clock10, DollarSign, Package, PackageCheck, PackageOpen, Shirt } from "lucide-react";
 
@@ -12,9 +14,7 @@ const Page = async () => {
 
     return (
         <div className="flex-1 w-full h-full flex flex-col gap-4">
-            <div className="w-full flex">
-                <h1 className="text-xl font-medium">Overview</h1>
-            </div>
+            <Heading subtitle="Overview sales and manage admins and orders" title="Overview"/>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
                 <div className="h-20 sm:h-28 bg-white shadow border border-gray-200 rounded-sm flex p-4 gap-4 items-center justify-start sm:justify-center">
                     <DollarSign className="w-8 h-8 text-slate-400"/>
@@ -76,7 +76,10 @@ const Page = async () => {
                                 <h2 className="text-xl text-gray-900 font-bold">{data.unpaidOrders + data.paidOrders}</h2>
                             </div>
                         </div>
-                    </div>  
+                    </div>
+                <Heading subtitle="Manage and Create Admins" title="Admins"/>
+                <Admins />
+                <Heading subtitle="Manage Orders" title="Orders"/>  
                 <Orders />
         </div>
     )

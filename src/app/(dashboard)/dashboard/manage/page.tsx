@@ -1,4 +1,5 @@
 import Filters from "@/components/Filters";
+import Heading from "@/components/Heading";
 import ResultsFilter from "@/components/ResultsFilter";
 import { products } from "@/db/schema";
 import { db } from "@/lib/db";
@@ -27,7 +28,9 @@ const Page = async ({params, searchParams}: ProductsProps) => {
 
 
     return (
-        <div className="w-full flex flex-col sm:flex-row py-2 gap-2 sm:gap-8">
+        <div>
+            <Heading subtitle="Manage or overview products" title="Products" />
+            <div className="w-full flex flex-col sm:flex-row py-2 gap-2 sm:gap-8">
             <Filters redirectUrl="dashboard/manage"/>
             <div className="w-full flex flex-col gap-2">
             <ResultsFilter queryString={queryString.toString()} redirectUrl="dashboard/manage"/>
@@ -60,6 +63,7 @@ const Page = async ({params, searchParams}: ProductsProps) => {
                 }
             </div>
             </div>
+        </div>
         </div>
     )
 };

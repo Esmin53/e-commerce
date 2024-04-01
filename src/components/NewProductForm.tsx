@@ -118,7 +118,7 @@ const NewProudctForm = () => {
     } 
 
     return (
-        <div className="w-full h-full p-2 bg-white rounded-lg shadow">
+        <div className="w-full h-full p-2 bg-white rounded-sm shadow border border-slate-200">
             <div aria-hidden="true" className="bg-black bg-white bg-red-400 bg-gray-700 bg-gray-300 
             bg-yellow-400 bg-blue-400 bg-emerald-400 bg-pink-400 bg-purple-400 bg-orange-400" />
             <form className="flex flex-col gap-2"

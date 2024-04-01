@@ -1,3 +1,4 @@
+import Heading from "@/components/Heading";
 import AreaChartComponent from "@/components/charts/AreaChart";
 import AreaChart from "@/components/charts/AreaChart";
 import { products } from "@/db/schema";
@@ -31,8 +32,7 @@ const Page = async ({params}: PageParams) => {
 
     return (
         <div className="flex flex-col gap-6">
-            <h1 className="text-2xl text-gray-900 font-bold flex items-center gap-2">Analytics - 
-            <span className="text-lg font-normal text-slate-500 truncate">{slug}</span></h1>
+            <Heading subtitle={`Analytics for ${slug}`} title="Analytics" />
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 lg:gap-4">
                 <div className="h-28 bg-white shadow border border-gray-200 rounded-sm flex p-4 gap-4 items-center sm:justify-center">
                     <DollarSign className="w-8 h-8 text-slate-400"/>
@@ -69,7 +69,7 @@ const Page = async ({params}: PageParams) => {
                             <p className="text-xl font-semibold">{price}$</p>
                         </div>
                     </div>
-
+                    <Heading subtitle={`Sales data for ${slug}`} title="Revenue and Sales" />
                     <div className="flex flex-col gap-2 border border-gray-200 bg-white shadow p-2">
                         <h2 className="text-lg font-medium text-gray-900 pl-4">Sales Data</h2>
                         <div className="h-56 sm:h-72 md:h-80 w-full">
