@@ -1,6 +1,8 @@
 import AddToCartButton from "@/components/AddToCartButton"
+import Heading from "@/components/Heading"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import ProductImageSlider from "@/components/ProductImagesSlider"
+import Suggested from "@/components/Suggested"
 import { products } from "@/db/schema"
 import { db } from "@/lib/db"
 import { TCollection, TSex } from "@/types/enmus"
@@ -64,6 +66,12 @@ const Page = async ({params}: PageParams) => {
                     <AddToCartButton product={product} />
                 </div>
             </div>
+            {suggested.length ? (
+                <div className="flex flex-col py-6">
+                    <Heading subtitle="Complete Your Look" title="You Might Also Like"/>
+                    <Suggested suggested={suggested} />
+                </div>
+            ) : null}
         </MaxWidthWrapper>
     )
 }
