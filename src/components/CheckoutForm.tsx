@@ -2,6 +2,7 @@ import { useCart } from "@/hooks/use-cart"
 import { Button } from "./ui/button"
 import { useRouter } from "next/navigation"
 import { toast } from "sonner"
+import { Session } from "next-auth"
 
 
 const CheckoutForm = () => {
@@ -17,7 +18,12 @@ const CheckoutForm = () => {
                 method: "POST",
                 body: JSON.stringify(items)
             })
-                if(!response.ok) {
+
+            if(!response.ok && response.status === 401) {
+                toast.error("Please sign in before you go to checkout.")
+                router.push('/sign-in?redirectUrl=/checkout')
+                return
+            } else if(!response.ok) {
                     toast.error("Something went wrong. Please try again later.")
                     return
                 }

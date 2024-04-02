@@ -5,13 +5,13 @@ import CheckoutForm from "@/components/CheckoutForm"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import { Button } from "@/components/ui/button"
 import { useCart } from "@/hooks/use-cart"
+import authOptions from "@/lib/auth"
+import { getServerSession } from "next-auth"
 import Link from "next/link"
 
 const Checkout = () => {
 
     const { items } = useCart()
-
-    let total = items.reduce((acc, curr) => acc + Number(curr.product.price), 0)
 
     return (
         <MaxWidthWrapper>

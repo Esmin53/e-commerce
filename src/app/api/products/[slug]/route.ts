@@ -1,9 +1,11 @@
 import { products } from "@/db/schema"
 import authOptions from "@/lib/auth"
 import { db } from "@/lib/db"
+import { stripe } from "@/lib/stripe"
 import { ProductValidator } from "@/lib/validators/product-validator"
 import { eq } from "drizzle-orm"
 import { getServerSession } from "next-auth"
+import Stripe from "stripe"
 
 
 export const GET = async (req: Request) => {
@@ -45,7 +47,8 @@ export const PUT = async (req: Request) => {
             sizes: data.sizes,
             colors: data.colors,
             description: data.description,
-            category: data.category
+            category: data.category,
+
         }).where(eq(products.id, productId))
 
 

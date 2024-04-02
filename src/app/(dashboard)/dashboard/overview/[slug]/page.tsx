@@ -82,7 +82,7 @@ const Page = async ({params}: PageParams) => {
                     <Heading subtitle="Overview sales by colors and sizes" title="Colors and Sizes" />
                     <div className="w-full flex flex-col sm:flex-row gap-6 sm:gap-2 h-[30rem] sm:h-72 ">
                         <div className="w-full sm:w-1/2 lg:w-1/3">
-                            <div className="w-full hidden sm:flex justify-between items-endpb-2 border-b-2 border-slate-200">
+                            <div className="w-full hidden sm:flex justify-between items-end pb-2 border-b-2 border-slate-200">
                                 <p className="font-medium text-gray-600">Colors</p>
                                 <PieChart className="text-gray-700"/>
                             </div>

@@ -12,9 +12,12 @@ import { toast } from "sonner";
 import { ZodError } from "zod";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import { Loader2 } from "lucide-react";
 
 const Page = () => {
     const [confirmPasswordError, setConfirmPasswordError] = useState<boolean>(false)
+    const [isLoading, setIsLoading] = useState<boolean >(false)
     const router = useRouter()
 
     const {
@@ -36,6 +39,7 @@ const Page = () => {
 
     const onSubmit: SubmitHandler<TAuthCredentialsValidator> = async ({username, password, confirmPassword}) => {
         try {
+            setIsLoading(true)
             if(!username || !password) {
                 toast.error("Please fill all required fields!")
                 return
@@ -71,8 +75,9 @@ const Page = () => {
                 toast.success("Account created successfully. Please sign in.")
                 router.push("/sign-in")
             }
-
+            setIsLoading(false)
         } catch (error) {
+            setIsLoading(false)
             if(error instanceof ZodError) {
                 toast.error("Please provide all required information.")
             } else {
@@ -83,8 +88,9 @@ const Page = () => {
 
     return (
         <MaxWidthWrapper>
-            <div className="flex flex-col h-full items-center justify-center w-full flex-1">
-                <form className="h-full w-full max-w-96 bg-slate-50 p-4 rounded-sm shadow border border-gray-200" 
+            <div className="flex h-full items-center justify-center w-full flex-1 min-h-[87vh]">
+                <form className="h-[87vh] max-h-[540px] flex-1 flex flex-col max-w-[540px] md:bg-white p-4 rounded-sm md:shadow md:border-y md:border-r
+         md:border-gray-100 md:px-10 lg:px-20" 
                 onSubmit={handleSubmit(onSubmit)}>
                 <h2 className="text-primary text-lg sm:text-xl font-semibold w-full text-center">Ecommerce</h2>
                 <h1 className=" text-xl sm:text-2xl text-gray-900 w-full text-center font-bold mb-6">Create An Account</h1>
@@ -103,11 +109,14 @@ const Page = () => {
                     <Input type="password" placeholder="Confirm password" {...register("confirmPassword")}/>
                     {confirmPasswordError ? <p className="text-xs font-semibold text-red-500">Confirm password and password fields must match.</p> : null}
                 </div>
-                <Button type="submit" className="w-full mt-4 sm:mt-8 mb-1">Sign up</Button>
+                <Button type="submit" className="w-full mt-4 sm:mt-8 mb-1" disabled={isLoading}>
+                {isLoading ? (<Loader2 className="animate-spin"/>) : "Sign Up"}
+                </Button>
                 <p className="text-sm ">Already an user? <Link href={'/sign-in'} 
                 className="text-sm text-blue-500">Sign in?</Link></p>
                 <p className="text-xs mt-6">By continuing, you agree to our Conditions of Use and Privacy Notice.</p>
             </form>
+            <Image src='/register.jpg' alt="Login" width={360} height={540} quality={100} className="hidden md:block object-cover"/>
             </div>
         </MaxWidthWrapper>
     )

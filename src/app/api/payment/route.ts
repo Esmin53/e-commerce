@@ -4,6 +4,7 @@ import authOptions from "@/lib/auth";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 import type Stripe from "stripe";
 
 export const POST =async (req: Request) => {
