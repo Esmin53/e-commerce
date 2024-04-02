@@ -1,6 +1,7 @@
 "use client"
 
 import Heading from "@/components/Heading"
+import UpdatePrice from "@/components/UpdatePrice"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -119,8 +120,7 @@ const Page = () => {
                     <h1 className="text-lg font-medium pb-1 border-b border-slate-200">General information</h1>
                     <div>
                         <Label>Price</Label>
-                        <Input placeholder="Product price" step="0.01" type="number" defaultValue={product.price} 
-                        onChange={e => setProduct({...product, price: e.target.value})}/>
+                        <UpdatePrice price={Number(product.price)} id={product.id} priceId={product.price_id}/>
                     </div>
                     <div className="w-full flex flex-col">
                         <Label className="mb-2">Colors</Label>

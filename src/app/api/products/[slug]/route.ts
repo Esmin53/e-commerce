@@ -41,7 +41,6 @@ export const PUT = async (req: Request) => {
         let data = ProductValidator.parse(body)
 
         await db.update(products).set({
-            price: data.price.toString(),
             title: data.title,
             collection: data.collection,
             sizes: data.sizes,
