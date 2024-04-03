@@ -3,8 +3,6 @@ import Heading from "@/components/Heading";
 import Pagination from "@/components/Pagination";
 import ResultsFilter from "@/components/ResultsFilter";
 import { products } from "@/db/schema";
-import { db } from "@/lib/db";
-import { RefreshCwOff, ShoppingBasket } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,6 +12,8 @@ interface ProductsProps {
         [key: string]: string;
     }
 }
+
+export const dynamic = 'force-dynamic';
 
 const Page = async ({params, searchParams}: ProductsProps) => {
 
@@ -41,7 +41,7 @@ const Page = async ({params, searchParams}: ProductsProps) => {
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-2 h-fit pb-12">
                 {
                     data?.records?.map((item) => (
-                        <div className="flex gap-2 sm:p-2 p-1">
+                        <div className="flex gap-2 sm:p-2 p-1" key={item.id}>
                             <div className="relative aspect-square w-16 sm:h-28 sm:w-28 md:h-32 md:w-32  overflow-hidden rounded-lg flex-shrink-0">
                                 <Image fill src={item.images[0]} alt={item.title} />
                             </div>

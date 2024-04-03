@@ -2,7 +2,8 @@ import { products } from "@/db/schema"
 import { db } from "@/lib/db"
 import { TCategory, TCollection, TColor, TSex, TSize } from "@/types/enmus"
 import { and, arrayContains, asc, desc, eq, sql } from "drizzle-orm"
-import { title } from "process"
+
+export const dynamic = 'force-dynamic';
 
 export const GET = async (req: Request) => {
     try {

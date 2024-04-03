@@ -12,6 +12,8 @@ interface ProductsProps {
     }
 }
 
+export const dynamic = 'force-dynamic';
+
 const Page = async ({params, searchParams}: ProductsProps) => {
 
     const queryString = new URLSearchParams()

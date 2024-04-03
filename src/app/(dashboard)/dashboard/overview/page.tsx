@@ -4,6 +4,7 @@ import Orders from "@/components/Orders";
 import AreaChartComponent from "@/components/charts/AreaChart";
 import { AreaChartIcon, Clock10, DollarSign, Package, PackageCheck, PackageOpen, Shirt } from "lucide-react";
 
+export const dynamic = 'force-dynamic';
 
 const Page = async () => {
 
@@ -12,8 +13,6 @@ const Page = async () => {
     })
 
     const data = await response.json()
-
-    console.log("Overview: ", data)
 
     return (
         <div className="flex-1 w-full h-full flex flex-col gap-4">

@@ -56,12 +56,12 @@ const Page = () => {
             <div className="flex flex-col py-2 gap-1 w-full">
                 <Label htmlFor="username">Username</Label>
                 <Input type="text" placeholder="Your username" {...register("username")}/>
-                {errors.username ? <p className="text-xs font-semibold text-red-500">"Please provide valid username"</p> : null}
+                {errors.username ? <p className="text-xs font-semibold text-red-500">&quot;Please provide valid username&quot;</p> : null}
             </div>
             <div className="flex flex-col py-2 gap-1 w-full">
                 <Label htmlFor="password">Password</Label>
                 <Input type="password" placeholder="Your Password" {...register("password")}/>
-                {errors.password ? <p className="text-xs font-semibold text-red-500">"Please provide valid password"</p> : null}
+                {errors.password ? <p className="text-xs font-semibold text-red-500">&quot;Please provide valid password&quot;</p> : null}
             </div>
         </div>
 

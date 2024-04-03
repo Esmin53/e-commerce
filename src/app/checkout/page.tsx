@@ -3,10 +3,7 @@
 import CartItem from "@/components/CartItem"
 import CheckoutForm from "@/components/CheckoutForm"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
-import { Button } from "@/components/ui/button"
 import { useCart } from "@/hooks/use-cart"
-import authOptions from "@/lib/auth"
-import { getServerSession } from "next-auth"
 import Link from "next/link"
 
 const Checkout = () => {
@@ -30,7 +27,7 @@ const Checkout = () => {
                         <p className="text-2xl text-gray-900 font-bold">{items.length}</p>
                     </div>
                     {items.map(({product}) => (
-                        <CartItem product={product}/>
+                        <CartItem product={product} key={product.id}/>
                     ))}
                 </div>
                 <CheckoutForm />
