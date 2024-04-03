@@ -9,7 +9,7 @@ interface ProductCardProps {
 const ProductCard = ({product}: ProductCardProps) => {
 
     return (
-        <Link href={`/products/${product.id}`} className="w-full gap-2 relative max-w-80 mx-auto">
+        <Link href={`/products/${product.id}`} className="w-full gap-2 relative max-w-96 mx-auto">
           <div className="w-full h-60 relative ">
             <Image src={product.images[0]} fill alt="product image"/>
           </div>

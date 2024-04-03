@@ -37,7 +37,7 @@ const Page = async ({params, searchParams}: ProductsProps) => {
             <div className="w-full flex flex-col sm:flex-row py-2 gap-2 sm:gap-8 flex-1">
             <Filters redirectUrl="dashboard/manage"/>
             <div className="w-full flex flex-col gap-2 relative h-full">
-            <ResultsFilter queryString={queryString.toString()} redirectUrl="dashboard/manage"/>
+            <ResultsFilter queryString={queryString.toString()} redirectUrl="dashboard/manage" totalResults={data.totalResults}/>
             <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-2 h-fit pb-12">
                 {
                     data?.records?.map((item) => (

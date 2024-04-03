@@ -1,12 +1,11 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
-import { BarChart2, GanttChartSquare, PieChart, ScatterChart } from "lucide-react";
+import { BarChart2 } from "lucide-react";
 import AccountTrigger from "./AccountTrigger";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth";
 import Cart from "./Cart";
 import MobileNav from "./MobileNav";
-import Image from "next/image";
 
 const Navbar = async () => {
 
@@ -35,7 +34,7 @@ const Navbar = async () => {
                         {session?.user.isAdmin ? (
                             <li className="cursor-pointer flex h-full items-center">
                                 <Link href='/dashboard/overview'>
-                                    <PieChart />
+                                    <BarChart2 className="text-gray-900"/>
                                 </Link>
                              </li>
                         ) : (<li className="cursor-pointer flex h-full items-center">

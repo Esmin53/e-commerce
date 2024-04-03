@@ -41,6 +41,20 @@ const HomepageCarousel = () => {
                     </div>
                 <Image fill src='/homepage/summer.jpg'  alt="Summer collection" className="object-cover object-left-top" quality={100}/>
                 </CarouselItem>
+                <CarouselItem className="w-full h-56 xs:h-72 sm:h-80 md:h-[29rem] relative">
+                <div className="flex flex-col absolute -translate-x-1/2 sm:-translate-x-0 left-1/2 sm:left-12 lg:left-38 bottom-2 
+                sm:top-44 md:top-64 sm:-translate-y-1/2 z-30 gap-0 sm:gap-4">
+                    <p className="text-sm md:text-lg font-medium hidden sm:block">Complete online shopping experience</p>
+                        <h1 className="text-3xl md:text-5xl lg:text-6xl text-center font-bold text-wrap">
+                            Completley <br /> Online
+                            </h1>
+                            <div className="w-full flex justify-end sm:justify-start px-2">
+                                <Link href='/products' 
+                                className="px-4 sm:px-6 py-2 rounded-full text-lg font-medium underline underline-offset-1">Shop Now</Link>
+                            </div>
+                    </div>
+                <Image fill src='/homepage/girlshoppingcart.jpg'  alt="Summer collection" className="object-cover object-right-top" quality={100}/>
+                </CarouselItem>
             </CarouselContent>
             <CarouselPrevious className="left-2 sm:left-4" variant='ghost'/>
             <CarouselNext className="right-2 sm:right-4" variant='ghost' />

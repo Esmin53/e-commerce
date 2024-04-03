@@ -3,6 +3,7 @@ import { ChevronDown, RefreshCwOff, ShoppingBasket } from "lucide-react";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
 import Pagination from "./Pagination";
+import ResultsFilter from "./ResultsFilter";
 
 
 const ProductsFeed = async ({queryString}: {queryString: string}) => {
@@ -33,8 +34,9 @@ const ProductsFeed = async ({queryString}: {queryString: string}) => {
     }
 
     return (
-        <div className="w-full flex-1 relative">
-            <div className="w-full grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 pb-14">
+        <div className="w-full flex-1 relative flex flex-col gap-4">
+            <ResultsFilter queryString={queryString} redirectUrl="products" totalResults={data.totalResults}/>
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pb-14">
                 {data.records?.map((item) => (
                     <ProductCard product={item} key={item.id}/>
                 ))}

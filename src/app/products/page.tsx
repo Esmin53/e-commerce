@@ -33,10 +33,7 @@ const Page = async ({params, searchParams}: ProductsProps) => {
             <div className="w-full flex flex-col sm:flex-row p-2 gap-2 sm:gap-8 relative flex-1">
                 <Filters redirectUrl="products"/>
                 <div className="flex-1 flex flex-col gap-2">
-                    <ResultsFilter queryString={queryString.toString()} redirectUrl="products"/>
-                    <div className="w-full flex p-1 gap-2">
-                        <p className="text-xl font-semibold">Results: </p>
-                    </div>
+                    {/*<ResultsFilter queryString={queryString.toString()} redirectUrl="products" />*/}
                     <ProductsFeed queryString={queryString.toString()} />
                 </div>
             </div>
