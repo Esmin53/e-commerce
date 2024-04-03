@@ -2,13 +2,17 @@ import { products } from "@/db/schema";
 import { ChevronDown, RefreshCwOff, ShoppingBasket } from "lucide-react";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
+import Pagination from "./Pagination";
 
 
 const ProductsFeed = async ({queryString}: {queryString: string}) => {
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/products?${queryString.toString()}`, {cache: "no-store"})
 
-    const data: typeof products.$inferSelect[] = await response.json()
+    const data: {
+        records: typeof products.$inferSelect[],
+        totalResults: number
+    } = await response.json()
 
     if(!response.ok) {
         return <div className="h-full w-full flex flex-col justify-center items-center gap-2">
@@ -19,7 +23,7 @@ const ProductsFeed = async ({queryString}: {queryString: string}) => {
         </div>        
     }
 
-    if(!data || !data?.length) {
+    if(!data || !data?.records?.length) {
         return <div className="h-full w-full flex flex-col justify-center items-center gap-2">
             <ShoppingBasket className="w-28 h-28 text-slate-300"/>
             <h1 className="text-xl text-slate-400 font-medium text-center">Looks like there are no items that match your criteria.
@@ -29,10 +33,13 @@ const ProductsFeed = async ({queryString}: {queryString: string}) => {
     }
 
     return (
-        <div className="w-full grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4">
-            {data?.map((item) => (
-                <ProductCard product={item} key={item.id}/>
-            ))}
+        <div className="w-full flex-1 relative">
+            <div className="w-full grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 pb-14">
+                {data.records?.map((item) => (
+                    <ProductCard product={item} key={item.id}/>
+                ))}
+            </div>
+            <Pagination totalResults={data.totalResults} queryString={queryString} redirectUrl="products"/>
         </div>
     )
 

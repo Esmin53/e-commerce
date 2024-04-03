@@ -7,20 +7,14 @@ import { usePathname } from "next/navigation"
 
 
 const FooterComponent = () => {
-
-    const excludedRoutes = ['/sign-in', '/sign-up', '/dashboard']; // Replace with your actual routes
-
+    
     const pathname = usePathname()
-
-    // Check if the current route is in the excludedRoutes array
-    const shouldShowFooter = !pathname.startsWith('/sign-in' || '/sign-up' || '/dashboard')
   
-    // If shouldShowFooter is false, return null to render nothing
     if (pathname.startsWith('/sign-in') || pathname.startsWith('/sign-up') || pathname.startsWith('/dashboard')) {
       return null;
     }
     return (
-        <div className="w-full flex flex-col justify-center border-t-2 border-slate-100 bg-white min-h-20 mt-8 sm:mt-16">
+        <div className="w-full flex flex-col justify-center border-t-2 border-slate-100 bg-white min-h-20 mt-4">
             <MaxWidthWrapper>
                 <div className="flex flex-wrap items-start justify-between p-2 gap-4 py-6 sm:py-16">
                     <h1 className="text-primary text-2xl lg:text-xl font-semibold h-full flex items-start w-full lg:w-fit 
