@@ -20,7 +20,7 @@ const Cart = () => {
                 <ShoppingBasket className="w-5 h-5 sm:w-6 sm:h-6"/>
                 <span className="w-4 h-4 bg-primary absolute -bottom-1.5 -right-1.5 rounded-full text-xs text-white font-medium">{items.length}</span>
             </SheetTrigger>
-            <SheetContent className="w-screen sm:w-[400px] p-2 sm:p-4 flex flex-col h-screen">
+            <SheetContent className="w-screen sm:w-[400px] p-2 sm:p-4 flex flex-col">
                 <SheetHeader>
                 <SheetTitle>My Cart</SheetTitle>
                     <SheetDescription className="text-md">

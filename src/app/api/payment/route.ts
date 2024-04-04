@@ -49,8 +49,8 @@ export const POST =async (req: Request) => {
             payment_method_types: ["card"],
             mode: "payment",
             metadata: {
-                userId: "Test",
-                orderId: "testOrderId"
+                userId: session.user.id,
+                orderId: orderId
             },
             line_items
         })
