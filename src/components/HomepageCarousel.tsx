@@ -49,7 +49,7 @@ const HomepageCarousel = () => {
                             Completley <br /> Online
                             </h1>
                             <div className="w-full flex justify-end sm:justify-start px-2">
-                                <Link href='/products' 
+                                <Link href='/products?collection=winter' 
                                 className="px-4 sm:px-6 py-2 rounded-full text-lg font-medium underline underline-offset-1">Shop Now</Link>
                             </div>
                     </div>

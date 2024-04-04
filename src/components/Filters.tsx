@@ -23,7 +23,7 @@ const Filters = ({redirectUrl}: FiltersProps) => {
     const [clr, setClr] = useState<string >(searchParams.get("color") || "")
     const [collection, setCollection] = useState<string>(searchParams.get("collection") || "")
     let orderBy = searchParams.get("orderBy")
-    const [hideFilters, setHideFilters] = useState<boolean >(false)
+    const [hideFilters, setHideFilters] = useState<boolean >(true)
 
     const handleSex = (s: string) => {
         setSex(sex === s ? "" : s)
@@ -36,10 +36,10 @@ const Filters = ({redirectUrl}: FiltersProps) => {
             <div className="flex w-full items-center gap-2 border-b border-slate-200 shadow-sm pb-1">
                 <AlignVerticalDistributeCenter className="w-5 h-5 text-gray-900"/>
                 <h1 className="font-bold text-lg text-gray-900 mr-auto">Filters</h1>
-                <ChevronDown className="text-gray-900 cursor-pointer w-5 h-5" onClick={() => setHideFilters(prev => !prev)}/>
+                <ChevronDown className="text-gray-900 cursor-pointer w-5 h-5 sm:hidden" onClick={() => setHideFilters(prev => !prev)}/>
             </div>
             <div className={cn("flex flex-col w-full gap-3", {
-                "hidden": hideFilters
+                "hidden sm:flex": hideFilters
             })}>
 
 
