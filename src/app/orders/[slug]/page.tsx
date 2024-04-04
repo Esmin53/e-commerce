@@ -50,13 +50,13 @@ const Page = async ({params}: PageParams) => {
     if(order.orderStatus === 'payment_pending') {
         message = "Your order has been proccessed and is awaiting payment."
     } else if (order.orderStatus === 'payment_successful') {
-        message = "Your order has been fully payed and is currently waiting to be shipped to your location"
+        message = "Your order has been fully payed and is currently waiting to be shipped to your location."
     } else if(order.orderStatus === "in_shipping") {
-        message = "Your order is currently being delivered to your location"
+        message = "Your order is currently being delivered to your location."
     } else if (order.orderStatus === "delivered") {
-        message = "Your order has been delivered to your location"
+        message = "Your order has been delivered to your location."
     } else if (order.orderStatus === "canceled") {
-        message = "Your order has been cancelled"
+        message = "Your order has been cancelled."
     }
 
     const total = orderInfos.reduce((acc, curr) => acc + Number(curr.price), 0)
