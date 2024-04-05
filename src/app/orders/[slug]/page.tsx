@@ -50,7 +50,7 @@ const Page = async ({params}: PageParams) => {
     if(order.orderStatus === 'payment_pending') {
         message = "Your order has been proccessed and is awaiting payment."
     } else if (order.orderStatus === 'payment_successful') {
-        message = "Your order has been fully payed and is currently waiting to be shipped to your location."
+        message = "Your order has been fully paid and is currently waiting to be shipped to your location."
     } else if(order.orderStatus === "in_shipping") {
         message = "Your order is currently being delivered to your location."
     } else if (order.orderStatus === "delivered") {
@@ -63,7 +63,7 @@ const Page = async ({params}: PageParams) => {
 
     return (
         <MaxWidthWrapper>
-                        <div className="w-full flex flex-col p-2 sm:py-4 sm:px-6 gap-2">
+            <div className="w-full flex flex-col p-2 sm:py-4 sm:px-6 gap-2">
                 <div className="w-full flex items-center gap-1">
                     <Link href='/'>Home</Link>
                     <span className="font-semibold">/</span>

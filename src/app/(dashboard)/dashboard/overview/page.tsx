@@ -2,17 +2,22 @@ import Admins from "@/components/Admins";
 import Heading from "@/components/Heading";
 import Orders from "@/components/Orders";
 import AreaChartComponent from "@/components/charts/AreaChart";
+import authOptions from "@/lib/auth";
 import { AreaChartIcon, Clock10, DollarSign, Package, PackageCheck, PackageOpen, Shirt } from "lucide-react";
+import { getServerSession } from "next-auth";
 
 export const dynamic = 'force-dynamic';
 
 const Page = async () => {
+
+    const session = await getServerSession(authOptions)
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/dashboard/overview`, {
         cache: "no-store"
     })
 
     const data = await response.json()
+
 
     return (
         <div className="flex-1 w-full h-full flex flex-col gap-4">
