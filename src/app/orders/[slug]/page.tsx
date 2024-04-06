@@ -41,10 +41,16 @@ const Page = async ({params}: PageParams) => {
         size: orderInfo.size,
         price: products.price,
         image: products.images,
-        title: products.title
+        title: products.title,
+        price_id: products.price_id
     }).from(orderInfo)
     .where(eq(orderInfo.orderId, order.id))
     .leftJoin(products, eq(orderInfo.productId, products.id))
+
+    const priceIds = orderInfos.map(({price_id}) => ({
+        price: price_id,
+        quantity: 1    
+    }))
 
     let message: string = ""
 
@@ -105,7 +111,8 @@ const Page = async ({params}: PageParams) => {
                                 </div>
                             </div>
                         })}
-                       {order.isPaid === false && order.orderStatus === 'payment_pending' ? <OrderOptions orderId={order.id}/> : null}
+                       {order.isPaid === false && order.orderStatus === 'payment_pending' ? 
+                       <OrderOptions orderId={order.id} priceIds={priceIds}/> : null}
                         <div className="w-full flex flex-col border-t border-slate-300 mt-3 p-1 sm:p-2 py-4 gap-4">
                             <div className="w-full flex items-center justify-between">
                                 <p className="text-slate-400 font-medium">Subtotal</p>
