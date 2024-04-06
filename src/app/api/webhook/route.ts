@@ -12,7 +12,7 @@ export const POST = async (req: NextRequest, res: NextResponse) => {
     const payload = await req.text()
     const response = await JSON.parse(payload)
 
-    const sig = req.headers.get("Stripe-Signature")
+    const sig = req.headers.get('stripe-signature') as string;
 
     const dateTime = new Date(response?.created * 1000).toLocaleDateString()
     const timeString = new Date(response?.created * 1000).toLocaleDateString()
