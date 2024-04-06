@@ -74,7 +74,7 @@ import { relations } from 'drizzle-orm';
 
   export const orderInfo = pgTable("orderInfo", {
     id: text("id").notNull().primaryKey().$default(() => uuidv4()),
-    orderId: text("order_id").references(() => orders.id) ,
+    orderId: text("order_id").references(() => orders.id, { onDelete: 'cascade' }) ,
     productId: text("product_id").references(() => products.id),
     color: colorsEnum("color").notNull(),
     size: sizesEnum("size").notNull(),

@@ -1,5 +1,6 @@
 import CartItem from "@/components/CartItem"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
+import OrderOptions from "@/components/OrderOptions"
 import { orderInfo , orders, products } from "@/db/schema"
 import authOptions from "@/lib/auth"
 import { db } from "@/lib/db"
@@ -104,7 +105,8 @@ const Page = async ({params}: PageParams) => {
                                 </div>
                             </div>
                         })}
-                        <div className="w-full flex flex-col border-t border-slate-300 mt-6 p-1 sm:p-2 py-4 gap-4">
+                       {order.isPaid === false && order.orderStatus === 'payment_pending' ? <OrderOptions orderId={order.id}/> : null}
+                        <div className="w-full flex flex-col border-t border-slate-300 mt-3 p-1 sm:p-2 py-4 gap-4">
                             <div className="w-full flex items-center justify-between">
                                 <p className="text-slate-400 font-medium">Subtotal</p>
                                 <p className="font-semibold">${total}</p>
