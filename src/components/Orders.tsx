@@ -39,7 +39,7 @@ const Orders = () => {
             </div>
             <div className="w-full flex flex-col gap-2">
                 {orders.map((item) => (
-                    <OrderCard orderId={item.id!} orderStatus={item.orderStatus!}/>
+                    <OrderCard key={item.id} orderId={item.id!} orderStatus={item.orderStatus!}/>
                 ))}
 
             </div>

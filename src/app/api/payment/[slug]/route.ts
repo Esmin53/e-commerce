@@ -20,13 +20,13 @@ export const POST =async (req: Request, {params}: {params: {slug: string}}) => {
             return new Response(JSON.stringify("UNATHORIZED"), { status: 401 })
         }
 
-        const [{orderId}] = await db.select({
+        const [{orderId, isPaid, orderStatus}] = await db.select({
             orderId: orders.id,
             orderStatus: orders.orderStatus,
             isPaid: orders.isPaid
         }).from(orders).where(eq(orders.id, slug))
 
-        if(!orderId) {
+        if(!orderId || isPaid === true || orderStatus !== "payment_pending") {
             throw new Error()
         }
 
