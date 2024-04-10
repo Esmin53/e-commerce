@@ -7,11 +7,6 @@ import Stripe from "stripe";
 import {buffer} from "micro"
 import getRawBody from "raw-body";
 
-export const config = {
-    api: {
-        bodyParser: false
-    }
-}
 
 const webhookHandler = async (req: any, res: any) => {
 
