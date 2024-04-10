@@ -46,11 +46,17 @@ export const POST =async (req: Request) => {
             success_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/orders/${orderId}`,
             cancel_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/checkout`,
             payment_method_types: ["card"],
-            mode: "payment",
+            payment_intent_data: {
+                metadata: {
+                    userId: session.user.id,
+                    orderId: orderId
+                }
+            },
             metadata: {
                 userId: session.user.id,
                 orderId: orderId
             },
+            mode: "payment",
             line_items
         })
 

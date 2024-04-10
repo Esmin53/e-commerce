@@ -11,10 +11,7 @@ import getRawBody from "raw-body";
 const webhookHandler = async (req: any, res: any) => {
 
     if(req.method === "POST") {
-    const payload = await req.text()
-    const response = await JSON.parse(payload)
-
-    
+    const payload = await req.text()    
 
     const sig = req.headers.get('stripe-signature')
 
@@ -32,6 +29,8 @@ const webhookHandler = async (req: any, res: any) => {
 
         const session = event.data.object as Stripe.Checkout.Session
 
+
+
         if (!session?.metadata?.userId || !session?.metadata?.orderId) {
             return new Response(JSON.stringify("No metadata"), { status: 400 })
             }
@@ -39,6 +38,7 @@ const webhookHandler = async (req: any, res: any) => {
         if (event.type === 'checkout.session.completed') {
             const [user] = await db.select().from(users).where(eq(users.id, session.metadata.userId))
 
+            console.log(session.metadata)
             if(!user) {
                 return new Response(JSON.stringify("No such user"), { status: 404 } );
             }
