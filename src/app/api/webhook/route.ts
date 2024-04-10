@@ -13,7 +13,7 @@ export const config = {
     }
 }
 
-const webhookHandler = async (req, res) => {
+const webhookHandler = async (req: any, res: any) => {
 
     if(req.method === "POST") {
     const payload = await req.text()
