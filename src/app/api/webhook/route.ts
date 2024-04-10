@@ -4,16 +4,24 @@ import { stripe } from "@/lib/stripe";
 import { eq } from "drizzle-orm";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import {buffer} from "micro"
+import getRawBody from "raw-body";
 
-const webhookHandler = async (req: NextRequest) => {
+export const config = {
+    api: {
+        bodyParser: false
+    }
+}
 
+const webhookHandler = async (req, res) => {
+
+    if(req.method === "POST") {
     const payload = await req.text()
     const response = await JSON.parse(payload)
 
-    const sig = req.headers.get('stripe-signature')
+    
 
-    const dateTime = new Date(response?.created * 1000).toLocaleDateString()
-    const timeString = new Date(response?.created * 1000).toLocaleDateString()
+    const sig = req.headers.get('stripe-signature')
 
     let event 
     try {
@@ -54,7 +62,7 @@ const webhookHandler = async (req: NextRequest) => {
 
 
             return NextResponse.json({ status: 200, event: event.type})
-
+}
 }
 
 export { webhookHandler as POST };
