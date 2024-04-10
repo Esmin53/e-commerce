@@ -6,16 +6,14 @@ import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-export const config = {  api: {    bodyParser: false,  },};
-
 export const POST = async (req: NextRequest) => {
+
+    const config = {  api: {    bodyParser: false,  },};
 
     const payload = await req.text()
     const response = await JSON.parse(payload)
 
     const sig = req.headers.get('stripe-signature')
-
-    console.log("PAYLOAD: ", payload)
 
     const dateTime = new Date(response?.created * 1000).toLocaleDateString()
     const timeString = new Date(response?.created * 1000).toLocaleDateString()
