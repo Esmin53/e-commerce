@@ -2,13 +2,10 @@ import { orders, users } from "@/db/schema";
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
 import { eq } from "drizzle-orm";
-import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 
-export const POST = async (req: NextRequest) => {
-
-    const config = {  api: {    bodyParser: false,  },};
+const webhookHandler = async (req: NextRequest) => {
 
     const payload = await req.text()
     const response = await JSON.parse(payload)
@@ -18,12 +15,17 @@ export const POST = async (req: NextRequest) => {
     const dateTime = new Date(response?.created * 1000).toLocaleDateString()
     const timeString = new Date(response?.created * 1000).toLocaleDateString()
 
+    let event 
     try {
-        let event = stripe.webhooks.constructEvent(
+            event = stripe.webhooks.constructEvent(
             payload,
             sig!,
             process.env.STRIPE_WEBHOOK_SECRET!
         )
+    } catch (error) {
+        console.log(error)
+        return NextResponse.json({ status: "Failed", error})
+    }
 
         const session = event.data.object as Stripe.Checkout.Session
 
@@ -52,8 +54,7 @@ export const POST = async (req: NextRequest) => {
 
 
             return NextResponse.json({ status: 200, event: event.type})
-    } catch (error) {
-        console.log(error)
-        return NextResponse.json({ status: "Failed", error})
-    }
+
 }
+
+export { webhookHandler as POST };
