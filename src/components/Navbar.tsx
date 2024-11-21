@@ -6,6 +6,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth";
 import Cart from "./Cart";
 import MobileNav from "./MobileNav";
+import Image from "next/image";
 
 const Navbar = async () => {
 
@@ -15,7 +16,11 @@ const Navbar = async () => {
         <div className="w-full h-12 sm:h-16">
             <MaxWidthWrapper className="px-2 h-full">
                 <div className="flex w-full h-full items-center justify-between">
-                    <Link href={'/'} className="text-primary font-medium">Ecommerce</Link>
+                    <Link href={'/'} className="text-primary font-medium flex items-center gap-1">
+                        <Image src='/logo2.png' width={138} height={20} 
+                        alt="Logo" quality={100} className="md:w-[166px] md:h-[24px]"
+                        sizes="(max-width: 768px) 100px, 200px" />
+                    </Link>
                     <ul className="hidden sm:flex items-center justfy-center gap-2 lg:gap-4 text-gray-800">
                         <li className="cursor-pointer hover:font-semibold">
                             <Link href='/'>Home</Link>

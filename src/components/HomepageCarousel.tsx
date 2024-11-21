@@ -73,7 +73,7 @@ const HomepageCarousel = () => {
             <div className="w-full sm:w-1/3 h-52  relative">
                 <div className="flex flex-col absolute right-4 sm:right-8 top-1/3 bottom-1/3 z-30  items-center gap-2 font-bold">
                     <h1 className="text-2xl  text-center">
-                        For Men&apos;s
+                        For Men
                     </h1>
                     <Link href={'/products?sex=male'} className="text-sm underline"> Shop Now</Link>
                 </div>

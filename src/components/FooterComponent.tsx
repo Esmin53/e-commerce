@@ -4,6 +4,7 @@ import { Facebook, Github, Instagram, LucideMail } from "lucide-react"
 import MaxWidthWrapper from "./MaxWidthWrapper"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import Image from "next/image"
 
 
 const FooterComponent = () => {
@@ -17,8 +18,10 @@ const FooterComponent = () => {
         <div className="w-full flex flex-col justify-center border-t-2 border-slate-100 bg-white min-h-20 mt-4">
             <MaxWidthWrapper>
                 <div className="flex flex-wrap items-start justify-between p-2 gap-4 py-6 sm:py-16">
-                    <h1 className="text-primary text-2xl lg:text-xl font-semibold h-full flex items-start w-full lg:w-fit 
-                    justify-center lg:justify-start">Ecommerce</h1>
+                    <Link href="/" className="h-full flex items-start w-full lg:w-fit 
+                    justify-center lg:justify-start py-4 lg:py-0">
+                        <Image src='/logo2.png' width={166} height={33} alt="Logo" quality={100}/>
+                    </Link>
                     <div className="flex flex-col gap-2 w-full max-w-96">
                         <h1 className="text-xl text-gray-900 font-semibold">More About Us</h1>
                         <p className="text-sm text-gray-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore ipsa praesentium excepturi ipsam fuga quisquam tenetur quibusdam architecto rerum quia.</p>
