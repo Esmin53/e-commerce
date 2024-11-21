@@ -29,8 +29,6 @@ const Filters = ({redirectUrl}: FiltersProps) => {
         setSex(sex === s ? "" : s)
     }
 
-    console.log("OrderBy: ", orderBy)
-
     return (
         <div className="w-full sm:w-1/4 min-w-48 h-fit bg-white sticky top-2 shadow border border-gray-100 flex flex-col p-2 gap-3 z-40">
             <div className="flex w-full items-center gap-2 border-b border-slate-200 shadow-sm pb-1">
@@ -43,7 +41,7 @@ const Filters = ({redirectUrl}: FiltersProps) => {
             })}>
 
 
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible className="z-40">
                 <AccordionItem value="item-1">
                 <AccordionTrigger>Category</AccordionTrigger>
                     <AccordionContent>
@@ -58,7 +56,7 @@ const Filters = ({redirectUrl}: FiltersProps) => {
                     </AccordionContent>
                 </AccordionItem>
             </Accordion>
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible className="z-40">
                 <AccordionItem value="item-1">
                 <AccordionTrigger>Size</AccordionTrigger>
                     <AccordionContent>

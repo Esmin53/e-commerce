@@ -2,18 +2,12 @@ import HomepageCarousel from "@/components/HomepageCarousel";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import ProductCard from "@/components/ProductCard";
 import { products } from "@/db/schema";
-import authOptions from "@/lib/auth";
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { getServerSession } from "next-auth";
 
 export default async function Home() {
 
-  const session = await getServerSession(authOptions)
-
   const featuredProducts = await db.select().from(products).where(eq(products.isFeatured, true))
-
-  console.log(featuredProducts)
 
   return (
     <MaxWidthWrapper>
@@ -25,10 +19,8 @@ export default async function Home() {
           {featuredProducts?.map((item) => (
             <ProductCard key={item.id} product={item}/>
           ))}
-
         </div>
       </div>
-
     </MaxWidthWrapper>
   );
 }
